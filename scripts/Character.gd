@@ -31,8 +31,9 @@ func blink():
 	left_eye.scale.y = 0.1
 	right_eye.scale.y = 0.1
 	
-	# Open eyes after short delay
-	await get_tree().create_timer(0.1).timeout
+	# Open eyes after short delay - Godot 4 syntax
+	var timer = get_tree().create_timer(0.1)
+	await timer.timeout
 	left_eye.scale.y = 1.0
 	right_eye.scale.y = 1.0
 	is_blinking = false
