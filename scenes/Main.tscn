@@ -1,1227 +1,668 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scripts/Main.gd" id="1"]
-[ext_resource type="Script" path="res://scripts/NPC.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/FlatCharacter.gd" id="2"]
 
-[sub_resource type="Gradient" id="1"]
-colors = PackedColorArray(0.18, 0.22, 0.28, 1, 0.12, 0.14, 0.18, 1)
-
-[sub_resource type="GradientTexture2D" id="2"]
-gradient = SubResource("1")
-fill_to = Vector2(0, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1"]
+bg_color = Color(0.2, 0.22, 0.28, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(640, 420)
+position = Vector2(960, 540)
 position_smoothing_enabled = true
 
 [node name="Office" type="Node2D" parent="."]
 
-[node name="AmbientLight" type="CanvasModulate" parent="Office"]
-color = Color(0.95, 0.92, 0.88, 1)
-
 [node name="Background" type="Node2D" parent="Office"]
 
-[node name="Ceiling" type="ColorRect" parent="Office/Background"]
-offset_right = 1400.0
-offset_bottom = 100.0
-color = Color(0.22, 0.24, 0.28, 1)
+[node name="Wall" type="Polygon2D" parent="Office/Background"]
+color = Color(0.92, 0.92, 0.95, 1)
+polygon = PackedVector2Array(0, 0, 1920, 0, 1920, 550, 0, 550)
 
-[node name="CeilingDetail" type="ColorRect" parent="Office/Background"]
-offset_top = 95.0
-offset_right = 1400.0
-offset_bottom = 100.0
-color = Color(0.18, 0.2, 0.24, 1)
+[node name="WallAccent" type="Polygon2D" parent="Office/Background"]
+color = Color(0.85, 0.88, 0.92, 1)
+polygon = PackedVector2Array(0, 520, 1920, 520, 1920, 550, 0, 550)
 
-[node name="BackWall" type="ColorRect" parent="Office/Background"]
-offset_top = 100.0
-offset_right = 1400.0
-offset_bottom = 360.0
-color = Color(0.28, 0.3, 0.35, 1)
+[node name="Floor" type="Polygon2D" parent="Office/Background"]
+color = Color(0.88, 0.85, 0.8, 1)
+polygon = PackedVector2Array(0, 550, 1920, 550, 1920, 1080, 0, 1080)
 
-[node name="WallGradient" type="ColorRect" parent="Office/Background"]
-offset_top = 100.0
-offset_right = 1400.0
-offset_bottom = 200.0
-color = Color(0.32, 0.34, 0.38, 0.3)
-
-[node name="Baseboard" type="ColorRect" parent="Office/Background"]
-offset_top = 350.0
-offset_right = 1400.0
-offset_bottom = 360.0
-color = Color(0.35, 0.32, 0.28, 1)
-
-[node name="Floor" type="ColorRect" parent="Office/Background"]
-offset_top = 360.0
-offset_right = 1400.0
-offset_bottom = 800.0
-color = Color(0.38, 0.35, 0.32, 1)
-
-[node name="FloorHighlight" type="ColorRect" parent="Office/Background"]
-offset_top = 360.0
-offset_right = 1400.0
-offset_bottom = 380.0
-color = Color(0.42, 0.38, 0.34, 0.5)
-
-[node name="FloorPattern1" type="ColorRect" parent="Office/Background"]
-offset_top = 440.0
-offset_right = 1400.0
-offset_bottom = 442.0
-color = Color(0.32, 0.3, 0.28, 0.4)
-
-[node name="FloorPattern2" type="ColorRect" parent="Office/Background"]
-offset_top = 540.0
-offset_right = 1400.0
-offset_bottom = 542.0
-color = Color(0.32, 0.3, 0.28, 0.4)
-
-[node name="FloorPattern3" type="ColorRect" parent="Office/Background"]
-offset_top = 640.0
-offset_right = 1400.0
-offset_bottom = 642.0
-color = Color(0.32, 0.3, 0.28, 0.4)
-
-[node name="WindowLight1" type="ColorRect" parent="Office/Background"]
-offset_left = 80.0
-offset_top = 360.0
-offset_right = 280.0
-offset_bottom = 600.0
-color = Color(1, 0.98, 0.9, 0.08)
-
-[node name="WindowLight2" type="ColorRect" parent="Office/Background"]
-offset_left = 350.0
-offset_top = 360.0
-offset_right = 550.0
-offset_bottom = 580.0
-color = Color(1, 0.98, 0.9, 0.06)
-
-[node name="WindowLight3" type="ColorRect" parent="Office/Background"]
-offset_left = 1000.0
-offset_top = 360.0
-offset_right = 1200.0
-offset_bottom = 600.0
-color = Color(1, 0.98, 0.9, 0.08)
+[node name="FloorShadow" type="Polygon2D" parent="Office/Background"]
+color = Color(0.82, 0.78, 0.72, 1)
+polygon = PackedVector2Array(0, 550, 1920, 550, 1920, 600, 0, 600)
 
 [node name="Window1" type="Node2D" parent="Office/Background"]
-position = Vector2(90, 120)
+position = Vector2(150, 120)
 
-[node name="Shadow" type="ColorRect" parent="Office/Background/Window1"]
-offset_left = 5.0
-offset_top = 5.0
-offset_right = 175.0
-offset_bottom = 215.0
-color = Color(0, 0, 0, 0.2)
+[node name="Frame" type="Polygon2D" parent="Office/Background/Window1"]
+color = Color(0.98, 0.98, 0.98, 1)
+polygon = PackedVector2Array(-10, -10, 210, -10, 210, 310, -10, 310)
 
-[node name="Frame" type="ColorRect" parent="Office/Background/Window1"]
-offset_right = 170.0
-offset_bottom = 210.0
-color = Color(0.4, 0.38, 0.35, 1)
+[node name="Glass" type="Polygon2D" parent="Office/Background/Window1"]
+color = Color(0.75, 0.88, 0.98, 1)
+polygon = PackedVector2Array(0, 0, 200, 0, 200, 300, 0, 300)
 
-[node name="FrameInner" type="ColorRect" parent="Office/Background/Window1"]
-offset_left = 6.0
-offset_top = 6.0
-offset_right = 164.0
-offset_bottom = 204.0
-color = Color(0.32, 0.3, 0.28, 1)
+[node name="Sky" type="Polygon2D" parent="Office/Background/Window1"]
+color = Color(0.55, 0.78, 0.95, 0.6)
+polygon = PackedVector2Array(0, 0, 200, 0, 200, 150, 0, 150)
 
-[node name="Glass" type="ColorRect" parent="Office/Background/Window1"]
-offset_left = 12.0
-offset_top = 12.0
-offset_right = 158.0
-offset_bottom = 198.0
-color = Color(0.55, 0.72, 0.88, 1)
+[node name="Cloud1" type="Polygon2D" parent="Office/Background/Window1"]
+position = Vector2(50, 60)
+color = Color(1, 1, 1, 0.9)
+polygon = PackedVector2Array(-30, 0, 30, 0, 40, 15, -40, 15, -35, 8, -20, -8, 0, -12, 20, -8, 35, 5)
 
-[node name="GlassHighlight" type="ColorRect" parent="Office/Background/Window1"]
-offset_left = 12.0
-offset_top = 12.0
-offset_right = 158.0
-offset_bottom = 80.0
-color = Color(0.7, 0.85, 0.95, 0.4)
+[node name="Cloud2" type="Polygon2D" parent="Office/Background/Window1"]
+position = Vector2(140, 100)
+scale = Vector2(0.7, 0.7)
+color = Color(1, 1, 1, 0.8)
+polygon = PackedVector2Array(-25, 0, 25, 0, 32, 12, -32, 12, -28, 6, -15, -6, 0, -10, 15, -6, 28, 4)
 
-[node name="Sky" type="ColorRect" parent="Office/Background/Window1"]
-offset_left = 12.0
-offset_top = 12.0
-offset_right = 158.0
-offset_bottom = 100.0
-color = Color(0.45, 0.65, 0.85, 0.3)
-
-[node name="Cloud1" type="ColorRect" parent="Office/Background/Window1"]
-offset_left = 30.0
-offset_top = 35.0
-offset_right = 90.0
-offset_bottom = 55.0
-color = Color(1, 1, 1, 0.7)
-
-[node name="Cloud2" type="ColorRect" parent="Office/Background/Window1"]
-offset_left = 100.0
-offset_top = 50.0
-offset_right = 145.0
-offset_bottom = 65.0
-color = Color(1, 1, 1, 0.5)
-
-[node name="Divider" type="ColorRect" parent="Office/Background/Window1"]
-offset_left = 83.0
-offset_top = 12.0
-offset_right = 87.0
-offset_bottom = 198.0
-color = Color(0.35, 0.33, 0.3, 1)
+[node name="Divider" type="Polygon2D" parent="Office/Background/Window1"]
+color = Color(0.95, 0.95, 0.95, 1)
+polygon = PackedVector2Array(96, 0, 104, 0, 104, 300, 96, 300)
 
 [node name="Window2" type="Node2D" parent="Office/Background"]
-position = Vector2(360, 120)
+position = Vector2(450, 120)
 
-[node name="Shadow" type="ColorRect" parent="Office/Background/Window2"]
-offset_left = 5.0
-offset_top = 5.0
-offset_right = 175.0
-offset_bottom = 215.0
-color = Color(0, 0, 0, 0.2)
+[node name="Frame" type="Polygon2D" parent="Office/Background/Window2"]
+color = Color(0.98, 0.98, 0.98, 1)
+polygon = PackedVector2Array(-10, -10, 210, -10, 210, 310, -10, 310)
 
-[node name="Frame" type="ColorRect" parent="Office/Background/Window2"]
-offset_right = 170.0
-offset_bottom = 210.0
-color = Color(0.4, 0.38, 0.35, 1)
+[node name="Glass" type="Polygon2D" parent="Office/Background/Window2"]
+color = Color(0.75, 0.88, 0.98, 1)
+polygon = PackedVector2Array(0, 0, 200, 0, 200, 300, 0, 300)
 
-[node name="FrameInner" type="ColorRect" parent="Office/Background/Window2"]
-offset_left = 6.0
-offset_top = 6.0
-offset_right = 164.0
-offset_bottom = 204.0
-color = Color(0.32, 0.3, 0.28, 1)
+[node name="Sky" type="Polygon2D" parent="Office/Background/Window2"]
+color = Color(0.55, 0.78, 0.95, 0.6)
+polygon = PackedVector2Array(0, 0, 200, 0, 200, 150, 0, 150)
 
-[node name="Glass" type="ColorRect" parent="Office/Background/Window2"]
-offset_left = 12.0
-offset_top = 12.0
-offset_right = 158.0
-offset_bottom = 198.0
-color = Color(0.55, 0.72, 0.88, 1)
-
-[node name="GlassHighlight" type="ColorRect" parent="Office/Background/Window2"]
-offset_left = 12.0
-offset_top = 12.0
-offset_right = 158.0
-offset_bottom = 80.0
-color = Color(0.7, 0.85, 0.95, 0.4)
-
-[node name="Divider" type="ColorRect" parent="Office/Background/Window2"]
-offset_left = 83.0
-offset_top = 12.0
-offset_right = 87.0
-offset_bottom = 198.0
-color = Color(0.35, 0.33, 0.3, 1)
+[node name="Divider" type="Polygon2D" parent="Office/Background/Window2"]
+color = Color(0.95, 0.95, 0.95, 1)
+polygon = PackedVector2Array(96, 0, 104, 0, 104, 300, 96, 300)
 
 [node name="Window3" type="Node2D" parent="Office/Background"]
-position = Vector2(1010, 120)
+position = Vector2(1550, 120)
 
-[node name="Shadow" type="ColorRect" parent="Office/Background/Window3"]
-offset_left = 5.0
-offset_top = 5.0
-offset_right = 175.0
-offset_bottom = 215.0
-color = Color(0, 0, 0, 0.2)
+[node name="Frame" type="Polygon2D" parent="Office/Background/Window3"]
+color = Color(0.98, 0.98, 0.98, 1)
+polygon = PackedVector2Array(-10, -10, 210, -10, 210, 310, -10, 310)
 
-[node name="Frame" type="ColorRect" parent="Office/Background/Window3"]
-offset_right = 170.0
-offset_bottom = 210.0
-color = Color(0.4, 0.38, 0.35, 1)
+[node name="Glass" type="Polygon2D" parent="Office/Background/Window3"]
+color = Color(0.75, 0.88, 0.98, 1)
+polygon = PackedVector2Array(0, 0, 200, 0, 200, 300, 0, 300)
 
-[node name="FrameInner" type="ColorRect" parent="Office/Background/Window3"]
-offset_left = 6.0
-offset_top = 6.0
-offset_right = 164.0
-offset_bottom = 204.0
-color = Color(0.32, 0.3, 0.28, 1)
+[node name="Sky" type="Polygon2D" parent="Office/Background/Window3"]
+color = Color(0.55, 0.78, 0.95, 0.6)
+polygon = PackedVector2Array(0, 0, 200, 0, 200, 150, 0, 150)
 
-[node name="Glass" type="ColorRect" parent="Office/Background/Window3"]
-offset_left = 12.0
-offset_top = 12.0
-offset_right = 158.0
-offset_bottom = 198.0
-color = Color(0.55, 0.72, 0.88, 1)
-
-[node name="GlassHighlight" type="ColorRect" parent="Office/Background/Window3"]
-offset_left = 12.0
-offset_top = 12.0
-offset_right = 158.0
-offset_bottom = 80.0
-color = Color(0.7, 0.85, 0.95, 0.4)
-
-[node name="Cloud1" type="ColorRect" parent="Office/Background/Window3"]
-offset_left = 25.0
-offset_top = 45.0
-offset_right = 75.0
-offset_bottom = 60.0
-color = Color(1, 1, 1, 0.6)
-
-[node name="Divider" type="ColorRect" parent="Office/Background/Window3"]
-offset_left = 83.0
-offset_top = 12.0
-offset_right = 87.0
-offset_bottom = 198.0
-color = Color(0.35, 0.33, 0.3, 1)
+[node name="Divider" type="Polygon2D" parent="Office/Background/Window3"]
+color = Color(0.95, 0.95, 0.95, 1)
+polygon = PackedVector2Array(96, 0, 104, 0, 104, 300, 96, 300)
 
 [node name="CeilingLight1" type="Node2D" parent="Office/Background"]
-position = Vector2(200, 90)
+position = Vector2(350, 40)
 
-[node name="Fixture" type="ColorRect" parent="Office/Background/CeilingLight1"]
-offset_left = -60.0
-offset_right = 60.0
-offset_bottom = 12.0
-color = Color(0.35, 0.35, 0.38, 1)
+[node name="Fixture" type="Polygon2D" parent="Office/Background/CeilingLight1"]
+color = Color(0.85, 0.85, 0.88, 1)
+polygon = PackedVector2Array(-80, 0, 80, 0, 75, 15, -75, 15)
 
-[node name="Light" type="ColorRect" parent="Office/Background/CeilingLight1"]
-offset_left = -55.0
-offset_top = 10.0
-offset_right = 55.0
-offset_bottom = 18.0
-color = Color(1, 0.98, 0.92, 1)
-
-[node name="Glow" type="ColorRect" parent="Office/Background/CeilingLight1"]
-offset_left = -70.0
-offset_top = 5.0
-offset_right = 70.0
-offset_bottom = 25.0
-color = Color(1, 0.98, 0.9, 0.15)
+[node name="Light" type="Polygon2D" parent="Office/Background/CeilingLight1"]
+color = Color(1, 0.98, 0.9, 1)
+polygon = PackedVector2Array(-70, 15, 70, 15, 65, 25, -65, 25)
 
 [node name="CeilingLight2" type="Node2D" parent="Office/Background"]
-position = Vector2(550, 90)
+position = Vector2(850, 40)
 
-[node name="Fixture" type="ColorRect" parent="Office/Background/CeilingLight2"]
-offset_left = -60.0
-offset_right = 60.0
-offset_bottom = 12.0
-color = Color(0.35, 0.35, 0.38, 1)
+[node name="Fixture" type="Polygon2D" parent="Office/Background/CeilingLight2"]
+color = Color(0.85, 0.85, 0.88, 1)
+polygon = PackedVector2Array(-80, 0, 80, 0, 75, 15, -75, 15)
 
-[node name="Light" type="ColorRect" parent="Office/Background/CeilingLight2"]
-offset_left = -55.0
-offset_top = 10.0
-offset_right = 55.0
-offset_bottom = 18.0
-color = Color(1, 0.98, 0.92, 1)
-
-[node name="Glow" type="ColorRect" parent="Office/Background/CeilingLight2"]
-offset_left = -70.0
-offset_top = 5.0
-offset_right = 70.0
-offset_bottom = 25.0
-color = Color(1, 0.98, 0.9, 0.15)
+[node name="Light" type="Polygon2D" parent="Office/Background/CeilingLight2"]
+color = Color(1, 0.98, 0.9, 1)
+polygon = PackedVector2Array(-70, 15, 70, 15, 65, 25, -65, 25)
 
 [node name="CeilingLight3" type="Node2D" parent="Office/Background"]
-position = Vector2(900, 90)
+position = Vector2(1350, 40)
 
-[node name="Fixture" type="ColorRect" parent="Office/Background/CeilingLight3"]
-offset_left = -60.0
-offset_right = 60.0
-offset_bottom = 12.0
-color = Color(0.35, 0.35, 0.38, 1)
+[node name="Fixture" type="Polygon2D" parent="Office/Background/CeilingLight3"]
+color = Color(0.85, 0.85, 0.88, 1)
+polygon = PackedVector2Array(-80, 0, 80, 0, 75, 15, -75, 15)
 
-[node name="Light" type="ColorRect" parent="Office/Background/CeilingLight3"]
-offset_left = -55.0
-offset_top = 10.0
-offset_right = 55.0
-offset_bottom = 18.0
-color = Color(1, 0.98, 0.92, 1)
-
-[node name="Glow" type="ColorRect" parent="Office/Background/CeilingLight3"]
-offset_left = -70.0
-offset_top = 5.0
-offset_right = 70.0
-offset_bottom = 25.0
-color = Color(1, 0.98, 0.9, 0.15)
+[node name="Light" type="Polygon2D" parent="Office/Background/CeilingLight3"]
+color = Color(1, 0.98, 0.9, 1)
+polygon = PackedVector2Array(-70, 15, 70, 15, 65, 25, -65, 25)
 
 [node name="Whiteboard" type="Node2D" parent="Office/Background"]
-position = Vector2(620, 140)
+position = Vector2(900, 130)
 
-[node name="Shadow" type="ColorRect" parent="Office/Background/Whiteboard"]
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 224.0
-offset_bottom = 164.0
-color = Color(0, 0, 0, 0.25)
+[node name="Frame" type="Polygon2D" parent="Office/Background/Whiteboard"]
+color = Color(0.7, 0.68, 0.65, 1)
+polygon = PackedVector2Array(-8, -8, 308, -8, 308, 208, -8, 208)
 
-[node name="Frame" type="ColorRect" parent="Office/Background/Whiteboard"]
-offset_right = 220.0
-offset_bottom = 160.0
-color = Color(0.5, 0.48, 0.45, 1)
+[node name="Board" type="Polygon2D" parent="Office/Background/Whiteboard"]
+color = Color(0.99, 0.99, 0.99, 1)
+polygon = PackedVector2Array(0, 0, 300, 0, 300, 200, 0, 200)
 
-[node name="Board" type="ColorRect" parent="Office/Background/Whiteboard"]
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 212.0
-offset_bottom = 152.0
-color = Color(0.98, 0.98, 0.96, 1)
+[node name="Line1" type="Polygon2D" parent="Office/Background/Whiteboard"]
+color = Color(0.3, 0.4, 0.8, 0.8)
+polygon = PackedVector2Array(20, 30, 180, 30, 180, 38, 20, 38)
 
-[node name="BoardShine" type="ColorRect" parent="Office/Background/Whiteboard"]
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 212.0
-offset_bottom = 50.0
-color = Color(1, 1, 1, 0.3)
+[node name="Line2" type="Polygon2D" parent="Office/Background/Whiteboard"]
+color = Color(0.3, 0.4, 0.8, 0.6)
+polygon = PackedVector2Array(20, 55, 140, 55, 140, 62, 20, 62)
 
-[node name="Text1" type="ColorRect" parent="Office/Background/Whiteboard"]
-offset_left = 20.0
-offset_top = 25.0
-offset_right = 130.0
-offset_bottom = 32.0
-color = Color(0.15, 0.15, 0.7, 0.8)
+[node name="Line3" type="Polygon2D" parent="Office/Background/Whiteboard"]
+color = Color(0.8, 0.3, 0.3, 0.8)
+polygon = PackedVector2Array(20, 80, 200, 80, 200, 88, 20, 88)
 
-[node name="Text2" type="ColorRect" parent="Office/Background/Whiteboard"]
-offset_left = 20.0
-offset_top = 42.0
-offset_right = 100.0
-offset_bottom = 48.0
-color = Color(0.15, 0.15, 0.7, 0.6)
+[node name="Checkbox1" type="Polygon2D" parent="Office/Background/Whiteboard"]
+color = Color(0.3, 0.7, 0.4, 1)
+polygon = PackedVector2Array(20, 110, 35, 110, 35, 125, 20, 125)
 
-[node name="Text3" type="ColorRect" parent="Office/Background/Whiteboard"]
-offset_left = 20.0
-offset_top = 58.0
-offset_right = 160.0
-offset_bottom = 64.0
-color = Color(0.7, 0.15, 0.15, 0.8)
+[node name="Checkbox2" type="Polygon2D" parent="Office/Background/Whiteboard"]
+color = Color(0.6, 0.6, 0.6, 0.5)
+polygon = PackedVector2Array(20, 135, 35, 135, 35, 150, 20, 150)
 
-[node name="Checkbox1" type="ColorRect" parent="Office/Background/Whiteboard"]
-offset_left = 20.0
-offset_top = 80.0
-offset_right = 32.0
-offset_bottom = 92.0
-color = Color(0.2, 0.6, 0.2, 0.8)
+[node name="Plant1" type="Node2D" parent="Office/Background"]
+position = Vector2(80, 480)
 
-[node name="Checkbox2" type="ColorRect" parent="Office/Background/Whiteboard"]
-offset_left = 20.0
-offset_top = 100.0
-offset_right = 32.0
-offset_bottom = 112.0
-color = Color(0.5, 0.5, 0.5, 0.5)
+[node name="Pot" type="Polygon2D" parent="Office/Background/Plant1"]
+color = Color(0.65, 0.5, 0.38, 1)
+polygon = PackedVector2Array(-25, 0, 25, 0, 20, 60, -20, 60)
 
-[node name="Tray" type="ColorRect" parent="Office/Background/Whiteboard"]
-offset_left = 40.0
-offset_top = 155.0
-offset_right = 180.0
-offset_bottom = 165.0
-color = Color(0.45, 0.43, 0.4, 1)
+[node name="PotRim" type="Polygon2D" parent="Office/Background/Plant1"]
+color = Color(0.58, 0.45, 0.32, 1)
+polygon = PackedVector2Array(-28, -5, 28, -5, 28, 5, -28, 5)
 
-[node name="Marker1" type="ColorRect" parent="Office/Background/Whiteboard"]
-offset_left = 60.0
-offset_top = 150.0
-offset_right = 75.0
-offset_bottom = 155.0
-color = Color(0.1, 0.1, 0.7, 1)
+[node name="Leaves" type="Polygon2D" parent="Office/Background/Plant1"]
+color = Color(0.35, 0.65, 0.4, 1)
+polygon = PackedVector2Array(0, -80, 25, -40, 35, -60, 20, -20, 0, -10, -20, -20, -35, -60, -25, -40)
 
-[node name="Marker2" type="ColorRect" parent="Office/Background/Whiteboard"]
-offset_left = 85.0
-offset_top = 150.0
-offset_right = 100.0
-offset_bottom = 155.0
-color = Color(0.7, 0.1, 0.1, 1)
+[node name="Plant2" type="Node2D" parent="Office/Background"]
+position = Vector2(1840, 480)
 
-[node name="Marker3" type="ColorRect" parent="Office/Background/Whiteboard"]
-offset_left = 110.0
-offset_top = 150.0
-offset_right = 125.0
-offset_bottom = 155.0
-color = Color(0.1, 0.5, 0.1, 1)
+[node name="Pot" type="Polygon2D" parent="Office/Background/Plant2"]
+color = Color(0.55, 0.45, 0.35, 1)
+polygon = PackedVector2Array(-25, 0, 25, 0, 20, 60, -20, 60)
 
-[node name="PlantLeft" type="Node2D" parent="Office/Background"]
-position = Vector2(40, 310)
+[node name="PotRim" type="Polygon2D" parent="Office/Background/Plant2"]
+color = Color(0.5, 0.4, 0.3, 1)
+polygon = PackedVector2Array(-28, -5, 28, -5, 28, 5, -28, 5)
 
-[node name="Pot" type="ColorRect" parent="Office/Background/PlantLeft"]
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 45.0
-color = Color(0.55, 0.4, 0.3, 1)
-
-[node name="PotRim" type="ColorRect" parent="Office/Background/PlantLeft"]
-offset_left = -22.0
-offset_top = -5.0
-offset_right = 22.0
-offset_bottom = 5.0
-color = Color(0.5, 0.35, 0.25, 1)
-
-[node name="Soil" type="ColorRect" parent="Office/Background/PlantLeft"]
-offset_left = -15.0
-offset_top = 2.0
-offset_right = 15.0
-offset_bottom = 12.0
-color = Color(0.25, 0.18, 0.12, 1)
-
-[node name="Stem1" type="ColorRect" parent="Office/Background/PlantLeft"]
-offset_left = -2.0
-offset_top = -60.0
-offset_right = 2.0
-offset_bottom = 5.0
-color = Color(0.25, 0.45, 0.25, 1)
-
-[node name="Leaf1" type="ColorRect" parent="Office/Background/PlantLeft"]
-offset_left = -18.0
-offset_top = -55.0
-offset_right = -2.0
-offset_bottom = -40.0
-color = Color(0.3, 0.55, 0.3, 1)
-
-[node name="Leaf2" type="ColorRect" parent="Office/Background/PlantLeft"]
-offset_left = 2.0
-offset_top = -65.0
-offset_right = 20.0
-offset_bottom = -50.0
-color = Color(0.35, 0.6, 0.35, 1)
-
-[node name="Leaf3" type="ColorRect" parent="Office/Background/PlantLeft"]
-offset_left = -15.0
-offset_top = -75.0
-offset_right = 5.0
-offset_bottom = -62.0
-color = Color(0.28, 0.5, 0.28, 1)
-
-[node name="Leaf4" type="ColorRect" parent="Office/Background/PlantLeft"]
-offset_left = 0.0
-offset_top = -85.0
-offset_right = 18.0
-offset_bottom = -72.0
-color = Color(0.32, 0.58, 0.32, 1)
-
-[node name="PlantRight" type="Node2D" parent="Office/Background"]
-position = Vector2(1250, 310)
-
-[node name="Pot" type="ColorRect" parent="Office/Background/PlantRight"]
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 45.0
-color = Color(0.45, 0.35, 0.28, 1)
-
-[node name="PotRim" type="ColorRect" parent="Office/Background/PlantRight"]
-offset_left = -22.0
-offset_top = -5.0
-offset_right = 22.0
-offset_bottom = 5.0
-color = Color(0.4, 0.3, 0.22, 1)
-
-[node name="Soil" type="ColorRect" parent="Office/Background/PlantRight"]
-offset_left = -15.0
-offset_top = 2.0
-offset_right = 15.0
-offset_bottom = 12.0
-color = Color(0.25, 0.18, 0.12, 1)
-
-[node name="Stem1" type="ColorRect" parent="Office/Background/PlantRight"]
-offset_left = -2.0
-offset_top = -55.0
-offset_right = 2.0
-offset_bottom = 5.0
-color = Color(0.22, 0.42, 0.22, 1)
-
-[node name="Leaf1" type="ColorRect" parent="Office/Background/PlantRight"]
-offset_left = -16.0
-offset_top = -50.0
-offset_right = -2.0
-offset_bottom = -38.0
-color = Color(0.28, 0.52, 0.28, 1)
-
-[node name="Leaf2" type="ColorRect" parent="Office/Background/PlantRight"]
-offset_left = 2.0
-offset_top = -60.0
-offset_right = 18.0
-offset_bottom = -48.0
-color = Color(0.32, 0.56, 0.32, 1)
-
-[node name="Leaf3" type="ColorRect" parent="Office/Background/PlantRight"]
-offset_left = -12.0
-offset_top = -70.0
-offset_right = 6.0
-offset_bottom = -58.0
-color = Color(0.26, 0.48, 0.26, 1)
+[node name="Leaves" type="Polygon2D" parent="Office/Background/Plant2"]
+color = Color(0.4, 0.7, 0.45, 1)
+polygon = PackedVector2Array(0, -75, 22, -35, 32, -55, 18, -18, 0, -8, -18, -18, -32, -55, -22, -35)
 
 [node name="BackRow" type="Node2D" parent="Office"]
-position = Vector2(0, -30)
+position = Vector2(0, 50)
 
 [node name="Desk1" type="Node2D" parent="Office/BackRow"]
-position = Vector2(80, 420)
+position = Vector2(200, 480)
 
-[node name="Shadow" type="ColorRect" parent="Office/BackRow/Desk1"]
-offset_left = 5.0
-offset_top = 25.0
-offset_right = 195.0
-offset_bottom = 50.0
-color = Color(0, 0, 0, 0.15)
+[node name="Shadow" type="Polygon2D" parent="Office/BackRow/Desk1"]
+color = Color(0.75, 0.72, 0.68, 0.5)
+polygon = PackedVector2Array(-100, 45, 100, 45, 105, 55, -95, 55)
 
-[node name="DeskSurface" type="ColorRect" parent="Office/BackRow/Desk1"]
-offset_right = 190.0
-offset_bottom = 22.0
-color = Color(0.55, 0.45, 0.35, 1)
+[node name="Surface" type="Polygon2D" parent="Office/BackRow/Desk1"]
+color = Color(0.98, 0.98, 0.98, 1)
+polygon = PackedVector2Array(-100, 0, 100, 0, 100, 40, -100, 40)
 
-[node name="DeskEdge" type="ColorRect" parent="Office/BackRow/Desk1"]
-offset_top = 20.0
-offset_right = 190.0
-offset_bottom = 25.0
-color = Color(0.45, 0.35, 0.28, 1)
+[node name="SurfaceTop" type="Polygon2D" parent="Office/BackRow/Desk1"]
+color = Color(0.92, 0.92, 0.95, 1)
+polygon = PackedVector2Array(-100, 0, 100, 0, 100, 8, -100, 8)
 
-[node name="MonitorShadow" type="ColorRect" parent="Office/BackRow/Desk1"]
-offset_left = 55.0
-offset_top = -60.0
-offset_right = 148.0
-offset_bottom = 5.0
-color = Color(0, 0, 0, 0.1)
+[node name="Leg" type="Polygon2D" parent="Office/BackRow/Desk1"]
+color = Color(0.85, 0.85, 0.88, 1)
+polygon = PackedVector2Array(-8, 40, 8, 40, 8, 100, -8, 100)
 
-[node name="Monitor" type="ColorRect" parent="Office/BackRow/Desk1"]
-offset_left = 50.0
-offset_top = -65.0
-offset_right = 145.0
-offset_bottom = 0.0
-color = Color(0.18, 0.18, 0.2, 1)
+[node name="Monitor" type="Node2D" parent="Office/BackRow/Desk1"]
+position = Vector2(0, -60)
 
-[node name="Screen" type="ColorRect" parent="Office/BackRow/Desk1"]
-offset_left = 55.0
-offset_top = -60.0
-offset_right = 140.0
-offset_bottom = -8.0
-color = Color(0.12, 0.18, 0.22, 1)
+[node name="Screen" type="Polygon2D" parent="Office/BackRow/Desk1/Monitor"]
+color = Color(0.2, 0.22, 0.28, 1)
+polygon = PackedVector2Array(-55, 0, 55, 0, 55, 75, -55, 75)
 
-[node name="ScreenGlow" type="ColorRect" parent="Office/BackRow/Desk1"]
-offset_left = 55.0
-offset_top = -60.0
-offset_right = 140.0
-offset_bottom = -40.0
-color = Color(0.2, 0.3, 0.35, 0.3)
+[node name="ScreenInner" type="Polygon2D" parent="Office/BackRow/Desk1/Monitor"]
+color = Color(0.15, 0.2, 0.25, 1)
+polygon = PackedVector2Array(-50, 5, 50, 5, 50, 70, -50, 70)
 
-[node name="Keyboard" type="ColorRect" parent="Office/BackRow/Desk1"]
-offset_left = 60.0
-offset_top = -12.0
-offset_right = 130.0
-offset_bottom = -2.0
-color = Color(0.22, 0.22, 0.24, 1)
+[node name="ScreenGlow" type="Polygon2D" parent="Office/BackRow/Desk1/Monitor"]
+color = Color(0.25, 0.35, 0.45, 0.4)
+polygon = PackedVector2Array(-50, 5, 50, 5, 50, 30, -50, 30)
+
+[node name="Stand" type="Polygon2D" parent="Office/BackRow/Desk1/Monitor"]
+color = Color(0.3, 0.3, 0.32, 1)
+polygon = PackedVector2Array(-8, 75, 8, 75, 8, 95, -8, 95)
+
+[node name="Base" type="Polygon2D" parent="Office/BackRow/Desk1/Monitor"]
+color = Color(0.35, 0.35, 0.38, 1)
+polygon = PackedVector2Array(-25, 95, 25, 95, 25, 102, -25, 102)
+
+[node name="Keyboard" type="Polygon2D" parent="Office/BackRow/Desk1"]
+color = Color(0.25, 0.25, 0.28, 1)
+polygon = PackedVector2Array(-40, -15, 40, -15, 40, -2, -40, -2)
 
 [node name="NPC1" type="Node2D" parent="Office/BackRow/Desk1"]
-position = Vector2(97, -5)
-scale = Vector2(0.65, 0.65)
+position = Vector2(0, -20)
+scale = Vector2(0.8, 0.8)
 script = ExtResource("2")
 
-[node name="Body" type="ColorRect" parent="Office/BackRow/Desk1/NPC1"]
-offset_left = -22.0
-offset_top = -28.0
-offset_right = 22.0
-offset_bottom = 25.0
-color = Color(0.35, 0.2, 0.55, 1)
+[node name="Body" type="Polygon2D" parent="Office/BackRow/Desk1/NPC1"]
+color = Color(0.45, 0.35, 0.7, 1)
+polygon = PackedVector2Array(-28, 0, 28, 0, 32, 70, -32, 70)
 
-[node name="BodyHighlight" type="ColorRect" parent="Office/BackRow/Desk1/NPC1"]
-offset_left = -22.0
-offset_top = -28.0
-offset_right = -10.0
-offset_bottom = 25.0
-color = Color(0.4, 0.25, 0.6, 0.3)
+[node name="Head" type="Polygon2D" parent="Office/BackRow/Desk1/NPC1"]
+position = Vector2(0, -55)
+color = Color(0.96, 0.87, 0.78, 1)
+polygon = PackedVector2Array(-22, -25, 22, -25, 25, 25, -25, 25)
 
-[node name="Head" type="ColorRect" parent="Office/BackRow/Desk1/NPC1"]
-offset_left = -16.0
-offset_top = -52.0
-offset_right = 16.0
-offset_bottom = -28.0
-color = Color(0.92, 0.78, 0.65, 1)
-
-[node name="Hair" type="ColorRect" parent="Office/BackRow/Desk1/NPC1"]
-offset_left = -18.0
-offset_top = -62.0
-offset_right = 18.0
-offset_bottom = -48.0
+[node name="Hair" type="Polygon2D" parent="Office/BackRow/Desk1/NPC1"]
+position = Vector2(0, -55)
 color = Color(0.25, 0.18, 0.12, 1)
+polygon = PackedVector2Array(-25, -35, 25, -35, 28, -15, -28, -15)
 
-[node name="LeftHand" type="ColorRect" parent="Office/BackRow/Desk1/NPC1"]
-offset_left = -32.0
-offset_top = -2.0
-offset_right = -22.0
-offset_bottom = 10.0
-color = Color(0.92, 0.78, 0.65, 1)
+[node name="LeftHand" type="Polygon2D" parent="Office/BackRow/Desk1/NPC1"]
+position = Vector2(-40, 45)
+color = Color(0.96, 0.87, 0.78, 1)
+polygon = PackedVector2Array(-10, -8, 10, -8, 10, 8, -10, 8)
 
-[node name="RightHand" type="ColorRect" parent="Office/BackRow/Desk1/NPC1"]
-offset_left = 22.0
-offset_top = -2.0
-offset_right = 32.0
-offset_bottom = 10.0
-color = Color(0.92, 0.78, 0.65, 1)
+[node name="RightHand" type="Polygon2D" parent="Office/BackRow/Desk1/NPC1"]
+position = Vector2(40, 45)
+color = Color(0.96, 0.87, 0.78, 1)
+polygon = PackedVector2Array(-10, -8, 10, -8, 10, 8, -10, 8)
 
 [node name="Desk2" type="Node2D" parent="Office/BackRow"]
-position = Vector2(320, 420)
+position = Vector2(500, 480)
 
-[node name="Shadow" type="ColorRect" parent="Office/BackRow/Desk2"]
-offset_left = 5.0
-offset_top = 25.0
-offset_right = 195.0
-offset_bottom = 50.0
-color = Color(0, 0, 0, 0.15)
+[node name="Shadow" type="Polygon2D" parent="Office/BackRow/Desk2"]
+color = Color(0.75, 0.72, 0.68, 0.5)
+polygon = PackedVector2Array(-100, 45, 100, 45, 105, 55, -95, 55)
 
-[node name="DeskSurface" type="ColorRect" parent="Office/BackRow/Desk2"]
-offset_right = 190.0
-offset_bottom = 22.0
-color = Color(0.55, 0.45, 0.35, 1)
+[node name="Surface" type="Polygon2D" parent="Office/BackRow/Desk2"]
+color = Color(0.98, 0.98, 0.98, 1)
+polygon = PackedVector2Array(-100, 0, 100, 0, 100, 40, -100, 40)
 
-[node name="DeskEdge" type="ColorRect" parent="Office/BackRow/Desk2"]
-offset_top = 20.0
-offset_right = 190.0
-offset_bottom = 25.0
-color = Color(0.45, 0.35, 0.28, 1)
+[node name="SurfaceTop" type="Polygon2D" parent="Office/BackRow/Desk2"]
+color = Color(0.92, 0.92, 0.95, 1)
+polygon = PackedVector2Array(-100, 0, 100, 0, 100, 8, -100, 8)
 
-[node name="Monitor" type="ColorRect" parent="Office/BackRow/Desk2"]
-offset_left = 50.0
-offset_top = -65.0
-offset_right = 145.0
-offset_bottom = 0.0
-color = Color(0.18, 0.18, 0.2, 1)
+[node name="Leg" type="Polygon2D" parent="Office/BackRow/Desk2"]
+color = Color(0.85, 0.85, 0.88, 1)
+polygon = PackedVector2Array(-8, 40, 8, 40, 8, 100, -8, 100)
 
-[node name="Screen" type="ColorRect" parent="Office/BackRow/Desk2"]
-offset_left = 55.0
-offset_top = -60.0
-offset_right = 140.0
-offset_bottom = -8.0
-color = Color(0.15, 0.12, 0.2, 1)
+[node name="Monitor" type="Node2D" parent="Office/BackRow/Desk2"]
+position = Vector2(0, -60)
 
-[node name="ScreenGlow" type="ColorRect" parent="Office/BackRow/Desk2"]
-offset_left = 55.0
-offset_top = -60.0
-offset_right = 140.0
-offset_bottom = -40.0
-color = Color(0.25, 0.2, 0.35, 0.3)
+[node name="Screen" type="Polygon2D" parent="Office/BackRow/Desk2/Monitor"]
+color = Color(0.2, 0.22, 0.28, 1)
+polygon = PackedVector2Array(-55, 0, 55, 0, 55, 75, -55, 75)
 
-[node name="Keyboard" type="ColorRect" parent="Office/BackRow/Desk2"]
-offset_left = 60.0
-offset_top = -12.0
-offset_right = 130.0
-offset_bottom = -2.0
-color = Color(0.22, 0.22, 0.24, 1)
+[node name="ScreenInner" type="Polygon2D" parent="Office/BackRow/Desk2/Monitor"]
+color = Color(0.18, 0.15, 0.22, 1)
+polygon = PackedVector2Array(-50, 5, 50, 5, 50, 70, -50, 70)
 
-[node name="CoffeeCup" type="ColorRect" parent="Office/BackRow/Desk2"]
-offset_left = 150.0
-offset_top = -18.0
-offset_right = 170.0
-offset_bottom = -2.0
-color = Color(0.9, 0.9, 0.88, 1)
+[node name="Stand" type="Polygon2D" parent="Office/BackRow/Desk2/Monitor"]
+color = Color(0.3, 0.3, 0.32, 1)
+polygon = PackedVector2Array(-8, 75, 8, 75, 8, 95, -8, 95)
+
+[node name="Base" type="Polygon2D" parent="Office/BackRow/Desk2/Monitor"]
+color = Color(0.35, 0.35, 0.38, 1)
+polygon = PackedVector2Array(-25, 95, 25, 95, 25, 102, -25, 102)
+
+[node name="Keyboard" type="Polygon2D" parent="Office/BackRow/Desk2"]
+color = Color(0.25, 0.25, 0.28, 1)
+polygon = PackedVector2Array(-40, -15, 40, -15, 40, -2, -40, -2)
+
+[node name="Coffee" type="Polygon2D" parent="Office/BackRow/Desk2"]
+color = Color(0.95, 0.95, 0.95, 1)
+polygon = PackedVector2Array(60, -20, 80, -20, 82, -2, 58, -2)
 
 [node name="NPC2" type="Node2D" parent="Office/BackRow/Desk2"]
-position = Vector2(97, -5)
-scale = Vector2(0.65, 0.65)
+position = Vector2(0, -20)
+scale = Vector2(0.8, 0.8)
 script = ExtResource("2")
 
-[node name="Body" type="ColorRect" parent="Office/BackRow/Desk2/NPC2"]
-offset_left = -22.0
-offset_top = -28.0
-offset_right = 22.0
-offset_bottom = 25.0
-color = Color(0.2, 0.45, 0.4, 1)
+[node name="Body" type="Polygon2D" parent="Office/BackRow/Desk2/NPC2"]
+color = Color(0.3, 0.6, 0.55, 1)
+polygon = PackedVector2Array(-28, 0, 28, 0, 32, 70, -32, 70)
 
-[node name="Head" type="ColorRect" parent="Office/BackRow/Desk2/NPC2"]
-offset_left = -16.0
-offset_top = -52.0
-offset_right = 16.0
-offset_bottom = -28.0
-color = Color(0.88, 0.72, 0.58, 1)
+[node name="Head" type="Polygon2D" parent="Office/BackRow/Desk2/NPC2"]
+position = Vector2(0, -55)
+color = Color(0.92, 0.82, 0.72, 1)
+polygon = PackedVector2Array(-22, -25, 22, -25, 25, 25, -25, 25)
 
-[node name="Hair" type="ColorRect" parent="Office/BackRow/Desk2/NPC2"]
-offset_left = -18.0
-offset_top = -62.0
-offset_right = 18.0
-offset_bottom = -48.0
-color = Color(0.55, 0.35, 0.2, 1)
+[node name="Hair" type="Polygon2D" parent="Office/BackRow/Desk2/NPC2"]
+position = Vector2(0, -55)
+color = Color(0.55, 0.38, 0.22, 1)
+polygon = PackedVector2Array(-25, -35, 25, -35, 28, -15, -28, -15)
 
-[node name="LeftHand" type="ColorRect" parent="Office/BackRow/Desk2/NPC2"]
-offset_left = -32.0
-offset_top = -2.0
-offset_right = -22.0
-offset_bottom = 10.0
-color = Color(0.88, 0.72, 0.58, 1)
+[node name="LeftHand" type="Polygon2D" parent="Office/BackRow/Desk2/NPC2"]
+position = Vector2(-40, 45)
+color = Color(0.92, 0.82, 0.72, 1)
+polygon = PackedVector2Array(-10, -8, 10, -8, 10, 8, -10, 8)
 
-[node name="RightHand" type="ColorRect" parent="Office/BackRow/Desk2/NPC2"]
-offset_left = 22.0
-offset_top = -2.0
-offset_right = 32.0
-offset_bottom = 10.0
-color = Color(0.88, 0.72, 0.58, 1)
+[node name="RightHand" type="Polygon2D" parent="Office/BackRow/Desk2/NPC2"]
+position = Vector2(40, 45)
+color = Color(0.92, 0.82, 0.72, 1)
+polygon = PackedVector2Array(-10, -8, 10, -8, 10, 8, -10, 8)
 
 [node name="Desk3" type="Node2D" parent="Office/BackRow"]
-position = Vector2(1020, 420)
+position = Vector2(1500, 480)
 
-[node name="Shadow" type="ColorRect" parent="Office/BackRow/Desk3"]
-offset_left = 5.0
-offset_top = 25.0
-offset_right = 195.0
-offset_bottom = 50.0
-color = Color(0, 0, 0, 0.15)
+[node name="Shadow" type="Polygon2D" parent="Office/BackRow/Desk3"]
+color = Color(0.75, 0.72, 0.68, 0.5)
+polygon = PackedVector2Array(-100, 45, 100, 45, 105, 55, -95, 55)
 
-[node name="DeskSurface" type="ColorRect" parent="Office/BackRow/Desk3"]
-offset_right = 190.0
-offset_bottom = 22.0
-color = Color(0.55, 0.45, 0.35, 1)
+[node name="Surface" type="Polygon2D" parent="Office/BackRow/Desk3"]
+color = Color(0.98, 0.98, 0.98, 1)
+polygon = PackedVector2Array(-100, 0, 100, 0, 100, 40, -100, 40)
 
-[node name="DeskEdge" type="ColorRect" parent="Office/BackRow/Desk3"]
-offset_top = 20.0
-offset_right = 190.0
-offset_bottom = 25.0
-color = Color(0.45, 0.35, 0.28, 1)
+[node name="SurfaceTop" type="Polygon2D" parent="Office/BackRow/Desk3"]
+color = Color(0.92, 0.92, 0.95, 1)
+polygon = PackedVector2Array(-100, 0, 100, 0, 100, 8, -100, 8)
 
-[node name="Monitor" type="ColorRect" parent="Office/BackRow/Desk3"]
-offset_left = 50.0
-offset_top = -65.0
-offset_right = 145.0
-offset_bottom = 0.0
-color = Color(0.18, 0.18, 0.2, 1)
+[node name="Leg" type="Polygon2D" parent="Office/BackRow/Desk3"]
+color = Color(0.85, 0.85, 0.88, 1)
+polygon = PackedVector2Array(-8, 40, 8, 40, 8, 100, -8, 100)
 
-[node name="Screen" type="ColorRect" parent="Office/BackRow/Desk3"]
-offset_left = 55.0
-offset_top = -60.0
-offset_right = 140.0
-offset_bottom = -8.0
-color = Color(0.18, 0.15, 0.12, 1)
+[node name="Monitor" type="Node2D" parent="Office/BackRow/Desk3"]
+position = Vector2(0, -60)
 
-[node name="ScreenGlow" type="ColorRect" parent="Office/BackRow/Desk3"]
-offset_left = 55.0
-offset_top = -60.0
-offset_right = 140.0
-offset_bottom = -40.0
-color = Color(0.28, 0.22, 0.18, 0.3)
+[node name="Screen" type="Polygon2D" parent="Office/BackRow/Desk3/Monitor"]
+color = Color(0.2, 0.22, 0.28, 1)
+polygon = PackedVector2Array(-55, 0, 55, 0, 55, 75, -55, 75)
 
-[node name="Keyboard" type="ColorRect" parent="Office/BackRow/Desk3"]
-offset_left = 60.0
-offset_top = -12.0
-offset_right = 130.0
-offset_bottom = -2.0
-color = Color(0.22, 0.22, 0.24, 1)
+[node name="ScreenInner" type="Polygon2D" parent="Office/BackRow/Desk3/Monitor"]
+color = Color(0.2, 0.18, 0.15, 1)
+polygon = PackedVector2Array(-50, 5, 50, 5, 50, 70, -50, 70)
+
+[node name="Stand" type="Polygon2D" parent="Office/BackRow/Desk3/Monitor"]
+color = Color(0.3, 0.3, 0.32, 1)
+polygon = PackedVector2Array(-8, 75, 8, 75, 8, 95, -8, 95)
+
+[node name="Base" type="Polygon2D" parent="Office/BackRow/Desk3/Monitor"]
+color = Color(0.35, 0.35, 0.38, 1)
+polygon = PackedVector2Array(-25, 95, 25, 95, 25, 102, -25, 102)
+
+[node name="Keyboard" type="Polygon2D" parent="Office/BackRow/Desk3"]
+color = Color(0.25, 0.25, 0.28, 1)
+polygon = PackedVector2Array(-40, -15, 40, -15, 40, -2, -40, -2)
 
 [node name="NPC3" type="Node2D" parent="Office/BackRow/Desk3"]
-position = Vector2(97, -5)
-scale = Vector2(0.65, 0.65)
+position = Vector2(0, -20)
+scale = Vector2(0.8, 0.8)
 script = ExtResource("2")
 
-[node name="Body" type="ColorRect" parent="Office/BackRow/Desk3/NPC3"]
-offset_left = -22.0
-offset_top = -28.0
-offset_right = 22.0
-offset_bottom = 25.0
-color = Color(0.6, 0.25, 0.2, 1)
+[node name="Body" type="Polygon2D" parent="Office/BackRow/Desk3/NPC3"]
+color = Color(0.75, 0.35, 0.3, 1)
+polygon = PackedVector2Array(-28, 0, 28, 0, 32, 70, -32, 70)
 
-[node name="Head" type="ColorRect" parent="Office/BackRow/Desk3/NPC3"]
-offset_left = -16.0
-offset_top = -52.0
-offset_right = 16.0
-offset_bottom = -28.0
-color = Color(0.55, 0.42, 0.32, 1)
+[node name="Head" type="Polygon2D" parent="Office/BackRow/Desk3/NPC3"]
+position = Vector2(0, -55)
+color = Color(0.6, 0.48, 0.38, 1)
+polygon = PackedVector2Array(-22, -25, 22, -25, 25, 25, -25, 25)
 
-[node name="Hair" type="ColorRect" parent="Office/BackRow/Desk3/NPC3"]
-offset_left = -18.0
-offset_top = -62.0
-offset_right = 18.0
-offset_bottom = -48.0
-color = Color(0.08, 0.08, 0.08, 1)
+[node name="Hair" type="Polygon2D" parent="Office/BackRow/Desk3/NPC3"]
+position = Vector2(0, -55)
+color = Color(0.1, 0.08, 0.08, 1)
+polygon = PackedVector2Array(-25, -35, 25, -35, 28, -15, -28, -15)
 
-[node name="LeftHand" type="ColorRect" parent="Office/BackRow/Desk3/NPC3"]
-offset_left = -32.0
-offset_top = -2.0
-offset_right = -22.0
-offset_bottom = 10.0
-color = Color(0.55, 0.42, 0.32, 1)
+[node name="LeftHand" type="Polygon2D" parent="Office/BackRow/Desk3/NPC3"]
+position = Vector2(-40, 45)
+color = Color(0.6, 0.48, 0.38, 1)
+polygon = PackedVector2Array(-10, -8, 10, -8, 10, 8, -10, 8)
 
-[node name="RightHand" type="ColorRect" parent="Office/BackRow/Desk3/NPC3"]
-offset_left = 22.0
-offset_top = -2.0
-offset_right = 32.0
-offset_bottom = 10.0
-color = Color(0.55, 0.42, 0.32, 1)
+[node name="RightHand" type="Polygon2D" parent="Office/BackRow/Desk3/NPC3"]
+position = Vector2(40, 45)
+color = Color(0.6, 0.48, 0.38, 1)
+polygon = PackedVector2Array(-10, -8, 10, -8, 10, 8, -10, 8)
 
 [node name="PlayerDesk" type="Node2D" parent="Office"]
-position = Vector2(420, 510)
+position = Vector2(960, 720)
 
-[node name="Shadow" type="ColorRect" parent="Office/PlayerDesk"]
-offset_left = 8.0
-offset_top = 45.0
-offset_right = 328.0
-offset_bottom = 75.0
-color = Color(0, 0, 0, 0.2)
+[node name="Shadow" type="Polygon2D" parent="Office/PlayerDesk"]
+color = Color(0.72, 0.68, 0.62, 0.6)
+polygon = PackedVector2Array(-180, 55, 180, 55, 190, 70, -170, 70)
 
-[node name="DeskSurface" type="ColorRect" parent="Office/PlayerDesk"]
-offset_right = 320.0
-offset_bottom = 38.0
-color = Color(0.58, 0.48, 0.38, 1)
+[node name="Surface" type="Polygon2D" parent="Office/PlayerDesk"]
+color = Color(0.98, 0.98, 0.98, 1)
+polygon = PackedVector2Array(-180, 0, 180, 0, 180, 50, -180, 50)
 
-[node name="DeskHighlight" type="ColorRect" parent="Office/PlayerDesk"]
-offset_right = 320.0
-offset_bottom = 8.0
-color = Color(0.65, 0.55, 0.45, 0.4)
+[node name="SurfaceTop" type="Polygon2D" parent="Office/PlayerDesk"]
+color = Color(0.95, 0.95, 0.97, 1)
+polygon = PackedVector2Array(-180, 0, 180, 0, 180, 10, -180, 10)
 
-[node name="DeskFront" type="ColorRect" parent="Office/PlayerDesk"]
-offset_top = 38.0
-offset_right = 320.0
-offset_bottom = 60.0
-color = Color(0.42, 0.34, 0.26, 1)
+[node name="Front" type="Polygon2D" parent="Office/PlayerDesk"]
+color = Color(0.88, 0.88, 0.9, 1)
+polygon = PackedVector2Array(-180, 50, 180, 50, 180, 70, -180, 70)
 
-[node name="DeskLegL" type="ColorRect" parent="Office/PlayerDesk"]
-offset_left = 20.0
-offset_top = 60.0
-offset_right = 38.0
-offset_bottom = 155.0
-color = Color(0.38, 0.3, 0.22, 1)
+[node name="LegL" type="Polygon2D" parent="Office/PlayerDesk"]
+color = Color(0.82, 0.82, 0.85, 1)
+polygon = PackedVector2Array(-170, 70, -150, 70, -150, 160, -170, 160)
 
-[node name="DeskLegR" type="ColorRect" parent="Office/PlayerDesk"]
-offset_left = 282.0
-offset_top = 60.0
-offset_right = 300.0
-offset_bottom = 155.0
-color = Color(0.38, 0.3, 0.22, 1)
+[node name="LegR" type="Polygon2D" parent="Office/PlayerDesk"]
+color = Color(0.82, 0.82, 0.85, 1)
+polygon = PackedVector2Array(150, 70, 170, 70, 170, 160, 150, 160)
 
 [node name="Monitor" type="Node2D" parent="Office/PlayerDesk"]
-position = Vector2(30, -120)
+position = Vector2(0, -130)
 
-[node name="Shadow" type="ColorRect" parent="Office/PlayerDesk/Monitor"]
-offset_left = 6.0
-offset_top = 6.0
-offset_right = 276.0
-offset_bottom = 176.0
-color = Color(0, 0, 0, 0.2)
+[node name="Shadow" type="Polygon2D" parent="Office/PlayerDesk/Monitor"]
+color = Color(0.7, 0.68, 0.65, 0.4)
+polygon = PackedVector2Array(-155, 180, 155, 180, 160, 195, -150, 195)
 
-[node name="Bezel" type="ColorRect" parent="Office/PlayerDesk/Monitor"]
-offset_right = 270.0
-offset_bottom = 170.0
-color = Color(0.15, 0.15, 0.17, 1)
+[node name="Screen" type="Polygon2D" parent="Office/PlayerDesk/Monitor"]
+color = Color(0.18, 0.2, 0.25, 1)
+polygon = PackedVector2Array(-150, 0, 150, 0, 150, 170, -150, 170)
 
-[node name="BezelHighlight" type="ColorRect" parent="Office/PlayerDesk/Monitor"]
-offset_right = 270.0
-offset_bottom = 8.0
-color = Color(0.25, 0.25, 0.28, 0.5)
+[node name="ScreenInner" type="Polygon2D" parent="Office/PlayerDesk/Monitor"]
+color = Color(0.1, 0.12, 0.16, 1)
+polygon = PackedVector2Array(-140, 10, 140, 10, 140, 160, -140, 160)
 
-[node name="Screen" type="ColorRect" parent="Office/PlayerDesk/Monitor"]
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 260.0
-offset_bottom = 160.0
-color = Color(0.08, 0.1, 0.14, 1)
+[node name="ScreenGlow" type="Polygon2D" parent="Office/PlayerDesk/Monitor"]
+color = Color(0.18, 0.25, 0.35, 0.35)
+polygon = PackedVector2Array(-140, 10, 140, 10, 140, 60, -140, 60)
 
-[node name="ScreenGlow" type="ColorRect" parent="Office/PlayerDesk/Monitor"]
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 260.0
-offset_bottom = 60.0
-color = Color(0.15, 0.2, 0.28, 0.35)
-
-[node name="PowerLED" type="ColorRect" parent="Office/PlayerDesk/Monitor"]
-offset_left = 250.0
-offset_top = 162.0
-offset_right = 258.0
-offset_bottom = 166.0
-color = Color(0.2, 0.8, 0.3, 1)
+[node name="PowerLED" type="Polygon2D" parent="Office/PlayerDesk/Monitor"]
+color = Color(0.3, 0.85, 0.45, 1)
+polygon = PackedVector2Array(130, 162, 138, 162, 138, 166, 130, 166)
 
 [node name="Hint" type="Label" parent="Office/PlayerDesk/Monitor"]
-offset_left = 50.0
+offset_left = -100.0
 offset_top = 70.0
-offset_right = 220.0
-offset_bottom = 100.0
+offset_right = 100.0
+offset_bottom = 110.0
 text = "💻 Klick zum Hinsetzen"
 horizontal_alignment = 1
 
-[node name="Stand" type="ColorRect" parent="Office/PlayerDesk/Monitor"]
-offset_left = 115.0
-offset_top = 170.0
-offset_right = 155.0
-offset_bottom = 200.0
-color = Color(0.18, 0.18, 0.2, 1)
+[node name="Stand" type="Polygon2D" parent="Office/PlayerDesk/Monitor"]
+color = Color(0.25, 0.25, 0.28, 1)
+polygon = PackedVector2Array(-15, 170, 15, 170, 15, 210, -15, 210)
 
-[node name="Base" type="ColorRect" parent="Office/PlayerDesk/Monitor"]
-offset_left = 95.0
-offset_top = 200.0
-offset_right = 175.0
-offset_bottom = 212.0
+[node name="Base" type="Polygon2D" parent="Office/PlayerDesk/Monitor"]
+color = Color(0.3, 0.3, 0.32, 1)
+polygon = PackedVector2Array(-50, 210, 50, 210, 50, 222, -50, 222)
+
+[node name="Keyboard" type="Polygon2D" parent="Office/PlayerDesk"]
+color = Color(0.22, 0.22, 0.25, 1)
+polygon = PackedVector2Array(-70, -30, 70, -30, 70, -5, -70, -5)
+
+[node name="KeyboardKeys" type="Polygon2D" parent="Office/PlayerDesk"]
+color = Color(0.28, 0.28, 0.32, 1)
+polygon = PackedVector2Array(-65, -27, 65, -27, 65, -8, -65, -8)
+
+[node name="MousePad" type="Polygon2D" parent="Office/PlayerDesk"]
 color = Color(0.2, 0.2, 0.22, 1)
+polygon = PackedVector2Array(90, -35, 150, -35, 150, -2, 90, -2)
 
-[node name="Keyboard" type="ColorRect" parent="Office/PlayerDesk"]
-offset_left = 90.0
-offset_top = -28.0
-offset_right = 210.0
-offset_bottom = -5.0
-color = Color(0.22, 0.22, 0.24, 1)
-
-[node name="KeyboardDetail" type="ColorRect" parent="Office/PlayerDesk"]
-offset_left = 95.0
-offset_top = -25.0
-offset_right = 205.0
-offset_bottom = -8.0
+[node name="Mouse" type="Polygon2D" parent="Office/PlayerDesk"]
 color = Color(0.28, 0.28, 0.3, 1)
+polygon = PackedVector2Array(105, -28, 135, -28, 138, -8, 102, -8)
 
-[node name="Mouse" type="ColorRect" parent="Office/PlayerDesk"]
-offset_left = 230.0
-offset_top = -22.0
-offset_right = 255.0
-offset_bottom = -5.0
-color = Color(0.22, 0.22, 0.24, 1)
-
-[node name="MousePad" type="ColorRect" parent="Office/PlayerDesk"]
-offset_left = 220.0
-offset_top = -28.0
-offset_right = 280.0
-offset_bottom = -2.0
-color = Color(0.18, 0.18, 0.2, 1)
-
-[node name="Coffee" type="ColorRect" parent="Office/PlayerDesk"]
-offset_left = 285.0
-offset_top = -28.0
-offset_right = 308.0
-offset_bottom = -5.0
-color = Color(0.85, 0.25, 0.3, 1)
-
-[node name="CoffeeHandle" type="ColorRect" parent="Office/PlayerDesk"]
-offset_left = 305.0
-offset_top = -22.0
-offset_right = 312.0
-offset_bottom = -12.0
-color = Color(0.85, 0.25, 0.3, 1)
+[node name="Coffee" type="Polygon2D" parent="Office/PlayerDesk"]
+color = Color(0.92, 0.35, 0.38, 1)
+polygon = PackedVector2Array(-145, -32, -115, -32, -112, -5, -148, -5)
 
 [node name="Chair" type="Node2D" parent="Office/PlayerDesk"]
-position = Vector2(160, 85)
+position = Vector2(0, 100)
 
-[node name="BackShadow" type="ColorRect" parent="Office/PlayerDesk/Chair"]
-offset_left = -43.0
-offset_top = -48.0
-offset_right = 47.0
-offset_bottom = 7.0
-color = Color(0, 0, 0, 0.15)
+[node name="Back" type="Polygon2D" parent="Office/PlayerDesk/Chair"]
+color = Color(0.28, 0.28, 0.32, 1)
+polygon = PackedVector2Array(-55, -70, 55, -70, 58, 5, -58, 5)
 
-[node name="Back" type="ColorRect" parent="Office/PlayerDesk/Chair"]
-offset_left = -48.0
-offset_top = -55.0
-offset_right = 48.0
-offset_bottom = 2.0
+[node name="BackHighlight" type="Polygon2D" parent="Office/PlayerDesk/Chair"]
+color = Color(0.35, 0.35, 0.4, 0.4)
+polygon = PackedVector2Array(-55, -70, -40, -70, -37, 5, -58, 5)
+
+[node name="Seat" type="Polygon2D" parent="Office/PlayerDesk/Chair"]
+color = Color(0.28, 0.28, 0.32, 1)
+polygon = PackedVector2Array(-60, 5, 60, 5, 60, 25, -60, 25)
+
+[node name="Pole" type="Polygon2D" parent="Office/PlayerDesk/Chair"]
+color = Color(0.6, 0.6, 0.65, 1)
+polygon = PackedVector2Array(-8, 25, 8, 25, 8, 65, -8, 65)
+
+[node name="WheelBase" type="Polygon2D" parent="Office/PlayerDesk/Chair"]
+color = Color(0.5, 0.5, 0.55, 1)
+polygon = PackedVector2Array(-50, 65, 50, 65, 50, 75, -50, 75)
+
+[node name="Wheel1" type="Polygon2D" parent="Office/PlayerDesk/Chair"]
 color = Color(0.25, 0.25, 0.28, 1)
+polygon = PackedVector2Array(-55, 72, -42, 72, -42, 82, -55, 82)
 
-[node name="BackHighlight" type="ColorRect" parent="Office/PlayerDesk/Chair"]
-offset_left = -48.0
-offset_top = -55.0
-offset_right = -35.0
-offset_bottom = 2.0
-color = Color(0.32, 0.32, 0.35, 0.4)
-
-[node name="Seat" type="ColorRect" parent="Office/PlayerDesk/Chair"]
-offset_left = -52.0
-offset_top = 2.0
-offset_right = 52.0
-offset_bottom = 22.0
+[node name="Wheel2" type="Polygon2D" parent="Office/PlayerDesk/Chair"]
 color = Color(0.25, 0.25, 0.28, 1)
-
-[node name="Pole" type="ColorRect" parent="Office/PlayerDesk/Chair"]
-offset_left = -6.0
-offset_top = 22.0
-offset_right = 6.0
-offset_bottom = 55.0
-color = Color(0.55, 0.55, 0.58, 1)
-
-[node name="WheelBase" type="ColorRect" parent="Office/PlayerDesk/Chair"]
-offset_left = -40.0
-offset_top = 55.0
-offset_right = 40.0
-offset_bottom = 65.0
-color = Color(0.45, 0.45, 0.48, 1)
-
-[node name="Wheel1" type="ColorRect" parent="Office/PlayerDesk/Chair"]
-offset_left = -45.0
-offset_top = 62.0
-offset_right = -35.0
-offset_bottom = 72.0
-color = Color(0.2, 0.2, 0.22, 1)
-
-[node name="Wheel2" type="ColorRect" parent="Office/PlayerDesk/Chair"]
-offset_left = 35.0
-offset_top = 62.0
-offset_right = 45.0
-offset_bottom = 72.0
-color = Color(0.2, 0.2, 0.22, 1)
+polygon = PackedVector2Array(42, 72, 55, 72, 55, 82, 42, 82)
 
 [node name="Player" type="Node2D" parent="Office/PlayerDesk"]
-position = Vector2(160, 35)
+position = Vector2(0, 50)
 
-[node name="BodyShadow" type="ColorRect" parent="Office/PlayerDesk/Player"]
-offset_left = -30.0
-offset_top = -35.0
-offset_right = 35.0
-offset_bottom = 40.0
-color = Color(0, 0, 0, 0.1)
+[node name="Body" type="Polygon2D" parent="Office/PlayerDesk/Player"]
+color = Color(0.25, 0.55, 0.85, 1)
+polygon = PackedVector2Array(-40, 0, 40, 0, 48, 90, -48, 90)
 
-[node name="Body" type="ColorRect" parent="Office/PlayerDesk/Player"]
-offset_left = -32.0
-offset_top = -40.0
-offset_right = 32.0
-offset_bottom = 35.0
-color = Color(0.15, 0.5, 0.82, 1)
+[node name="BodyHighlight" type="Polygon2D" parent="Office/PlayerDesk/Player"]
+color = Color(0.32, 0.62, 0.92, 0.35)
+polygon = PackedVector2Array(-40, 0, -25, 0, -20, 90, -48, 90)
 
-[node name="BodyHighlight" type="ColorRect" parent="Office/PlayerDesk/Player"]
-offset_left = -32.0
-offset_top = -40.0
-offset_right = -18.0
-offset_bottom = 35.0
-color = Color(0.22, 0.58, 0.88, 0.4)
+[node name="Collar" type="Polygon2D" parent="Office/PlayerDesk/Player"]
+color = Color(0.98, 0.98, 0.98, 1)
+polygon = PackedVector2Array(-18, 0, 18, 0, 15, 12, -15, 12)
 
-[node name="Collar" type="ColorRect" parent="Office/PlayerDesk/Player"]
-offset_left = -12.0
-offset_top = -40.0
-offset_right = 12.0
-offset_bottom = -32.0
-color = Color(0.95, 0.95, 0.92, 1)
+[node name="Head" type="Polygon2D" parent="Office/PlayerDesk/Player"]
+position = Vector2(0, -55)
+color = Color(0.98, 0.9, 0.8, 1)
+polygon = PackedVector2Array(-30, -35, 30, -35, 35, 35, -35, 35)
 
-[node name="Head" type="ColorRect" parent="Office/PlayerDesk/Player"]
-offset_left = -24.0
-offset_top = -78.0
-offset_right = 24.0
-offset_bottom = -40.0
-color = Color(1, 0.88, 0.75, 1)
+[node name="HeadHighlight" type="Polygon2D" parent="Office/PlayerDesk/Player"]
+position = Vector2(0, -55)
+color = Color(1, 0.95, 0.88, 0.4)
+polygon = PackedVector2Array(-30, -35, -18, -35, -12, 35, -35, 35)
 
-[node name="HeadHighlight" type="ColorRect" parent="Office/PlayerDesk/Player"]
-offset_left = -24.0
-offset_top = -78.0
-offset_right = -15.0
-offset_bottom = -40.0
-color = Color(1, 0.92, 0.82, 0.4)
+[node name="Hair" type="Polygon2D" parent="Office/PlayerDesk/Player"]
+position = Vector2(0, -55)
+color = Color(0.15, 0.1, 0.08, 1)
+polygon = PackedVector2Array(-35, -50, 35, -50, 38, -25, -38, -25)
 
-[node name="Hair" type="ColorRect" parent="Office/PlayerDesk/Player"]
-offset_left = -28.0
-offset_top = -92.0
-offset_right = 28.0
-offset_bottom = -72.0
-color = Color(0.12, 0.08, 0.05, 1)
+[node name="LeftArm" type="Polygon2D" parent="Office/PlayerDesk/Player"]
+color = Color(0.25, 0.55, 0.85, 1)
+polygon = PackedVector2Array(-55, 10, -40, 10, -40, 55, -55, 55)
 
-[node name="HairSide" type="ColorRect" parent="Office/PlayerDesk/Player"]
-offset_left = -28.0
-offset_top = -85.0
-offset_right = -22.0
-offset_bottom = -60.0
-color = Color(0.12, 0.08, 0.05, 1)
+[node name="RightArm" type="Polygon2D" parent="Office/PlayerDesk/Player"]
+color = Color(0.22, 0.5, 0.78, 1)
+polygon = PackedVector2Array(40, 10, 55, 10, 55, 55, 40, 55)
 
-[node name="LeftArm" type="ColorRect" parent="Office/PlayerDesk/Player"]
-offset_left = -45.0
-offset_top = -30.0
-offset_right = -32.0
-offset_bottom = 15.0
-color = Color(0.15, 0.5, 0.82, 1)
+[node name="LeftHand" type="Polygon2D" parent="Office/PlayerDesk/Player"]
+position = Vector2(-47, 65)
+color = Color(0.98, 0.9, 0.8, 1)
+polygon = PackedVector2Array(-12, -8, 12, -8, 12, 12, -12, 12)
 
-[node name="RightArm" type="ColorRect" parent="Office/PlayerDesk/Player"]
-offset_left = 32.0
-offset_top = -30.0
-offset_right = 45.0
-offset_bottom = 15.0
-color = Color(0.12, 0.45, 0.75, 1)
-
-[node name="LeftHand" type="ColorRect" parent="Office/PlayerDesk/Player"]
-offset_left = -48.0
-offset_top = 10.0
-offset_right = -32.0
-offset_bottom = 25.0
-color = Color(1, 0.88, 0.75, 1)
-
-[node name="RightHand" type="ColorRect" parent="Office/PlayerDesk/Player"]
-offset_left = 32.0
-offset_top = 10.0
-offset_right = 48.0
-offset_bottom = 25.0
-color = Color(1, 0.88, 0.75, 1)
+[node name="RightHand" type="Polygon2D" parent="Office/PlayerDesk/Player"]
+position = Vector2(47, 65)
+color = Color(0.98, 0.9, 0.8, 1)
+polygon = PackedVector2Array(-12, -8, 12, -8, 12, 12, -12, 12)
 
 [node name="SideDesk" type="Node2D" parent="Office"]
-position = Vector2(880, 540)
+position = Vector2(1600, 750)
 
-[node name="Shadow" type="ColorRect" parent="Office/SideDesk"]
-offset_left = 5.0
-offset_top = 28.0
-offset_right = 200.0
-offset_bottom = 55.0
-color = Color(0, 0, 0, 0.15)
+[node name="Shadow" type="Polygon2D" parent="Office/SideDesk"]
+color = Color(0.75, 0.72, 0.68, 0.5)
+polygon = PackedVector2Array(-110, 48, 110, 48, 115, 60, -105, 60)
 
-[node name="DeskSurface" type="ColorRect" parent="Office/SideDesk"]
-offset_right = 195.0
-offset_bottom = 25.0
-color = Color(0.55, 0.45, 0.35, 1)
+[node name="Surface" type="Polygon2D" parent="Office/SideDesk"]
+color = Color(0.98, 0.98, 0.98, 1)
+polygon = PackedVector2Array(-110, 0, 110, 0, 110, 45, -110, 45)
 
-[node name="DeskEdge" type="ColorRect" parent="Office/SideDesk"]
-offset_top = 23.0
-offset_right = 195.0
-offset_bottom = 28.0
-color = Color(0.45, 0.35, 0.28, 1)
+[node name="SurfaceTop" type="Polygon2D" parent="Office/SideDesk"]
+color = Color(0.92, 0.92, 0.95, 1)
+polygon = PackedVector2Array(-110, 0, 110, 0, 110, 8, -110, 8)
 
-[node name="MonitorShadow" type="ColorRect" parent="Office/SideDesk"]
-offset_left = 52.0
-offset_top = -58.0
-offset_right = 148.0
-offset_bottom = 5.0
-color = Color(0, 0, 0, 0.1)
+[node name="Monitor" type="Node2D" parent="Office/SideDesk"]
+position = Vector2(0, -55)
 
-[node name="Monitor" type="ColorRect" parent="Office/SideDesk"]
-offset_left = 48.0
-offset_top = -62.0
-offset_right = 145.0
-offset_bottom = 0.0
-color = Color(0.15, 0.15, 0.17, 1)
+[node name="Screen" type="Polygon2D" parent="Office/SideDesk/Monitor"]
+color = Color(0.2, 0.22, 0.28, 1)
+polygon = PackedVector2Array(-50, 0, 50, 0, 50, 68, -50, 68)
 
-[node name="Screen" type="ColorRect" parent="Office/SideDesk"]
-offset_left = 52.0
-offset_top = -58.0
-offset_right = 141.0
-offset_bottom = -6.0
-color = Color(0.1, 0.14, 0.1, 1)
+[node name="ScreenInner" type="Polygon2D" parent="Office/SideDesk/Monitor"]
+color = Color(0.12, 0.18, 0.14, 1)
+polygon = PackedVector2Array(-45, 5, 45, 5, 45, 63, -45, 63)
 
-[node name="ScreenGlow" type="ColorRect" parent="Office/SideDesk"]
-offset_left = 52.0
-offset_top = -58.0
-offset_right = 141.0
-offset_bottom = -40.0
-color = Color(0.18, 0.25, 0.18, 0.3)
+[node name="Stand" type="Polygon2D" parent="Office/SideDesk/Monitor"]
+color = Color(0.28, 0.28, 0.3, 1)
+polygon = PackedVector2Array(-7, 68, 7, 68, 7, 88, -7, 88)
 
-[node name="Keyboard" type="ColorRect" parent="Office/SideDesk"]
-offset_left = 55.0
-offset_top = -12.0
-offset_right = 135.0
-offset_bottom = -2.0
-color = Color(0.22, 0.22, 0.24, 1)
+[node name="Base" type="Polygon2D" parent="Office/SideDesk/Monitor"]
+color = Color(0.32, 0.32, 0.35, 1)
+polygon = PackedVector2Array(-22, 88, 22, 88, 22, 95, -22, 95)
+
+[node name="Keyboard" type="Polygon2D" parent="Office/SideDesk"]
+color = Color(0.25, 0.25, 0.28, 1)
+polygon = PackedVector2Array(-35, -12, 35, -12, 35, -2, -35, -2)
 
 [node name="NPC4" type="Node2D" parent="Office/SideDesk"]
-position = Vector2(97, 0)
-scale = Vector2(0.78, 0.78)
+position = Vector2(0, -5)
+scale = Vector2(0.85, 0.85)
 script = ExtResource("2")
 
-[node name="Body" type="ColorRect" parent="Office/SideDesk/NPC4"]
-offset_left = -24.0
-offset_top = -35.0
-offset_right = 24.0
-offset_bottom = 28.0
-color = Color(0.52, 0.22, 0.32, 1)
+[node name="Body" type="Polygon2D" parent="Office/SideDesk/NPC4"]
+color = Color(0.6, 0.3, 0.4, 1)
+polygon = PackedVector2Array(-30, 0, 30, 0, 35, 75, -35, 75)
 
-[node name="BodyHighlight" type="ColorRect" parent="Office/SideDesk/NPC4"]
-offset_left = -24.0
-offset_top = -35.0
-offset_right = -12.0
-offset_bottom = 28.0
-color = Color(0.58, 0.28, 0.38, 0.3)
+[node name="BodyHighlight" type="Polygon2D" parent="Office/SideDesk/NPC4"]
+color = Color(0.68, 0.38, 0.48, 0.35)
+polygon = PackedVector2Array(-30, 0, -15, 0, -10, 75, -35, 75)
 
-[node name="Head" type="ColorRect" parent="Office/SideDesk/NPC4"]
-offset_left = -18.0
-offset_top = -62.0
-offset_right = 18.0
-offset_bottom = -35.0
-color = Color(0.95, 0.82, 0.68, 1)
+[node name="Head" type="Polygon2D" parent="Office/SideDesk/NPC4"]
+position = Vector2(0, -58)
+color = Color(0.96, 0.85, 0.72, 1)
+polygon = PackedVector2Array(-24, -28, 24, -28, 28, 28, -28, 28)
 
-[node name="Hair" type="ColorRect" parent="Office/SideDesk/NPC4"]
-offset_left = -20.0
-offset_top = -78.0
-offset_right = 20.0
-offset_bottom = -58.0
-color = Color(0.75, 0.55, 0.32, 1)
+[node name="Hair" type="Polygon2D" parent="Office/SideDesk/NPC4"]
+position = Vector2(0, -58)
+color = Color(0.72, 0.52, 0.32, 1)
+polygon = PackedVector2Array(-28, -42, 28, -42, 30, -18, -30, -18)
 
-[node name="HairBack" type="ColorRect" parent="Office/SideDesk/NPC4"]
-offset_left = -20.0
-offset_top = -72.0
-offset_right = 20.0
-offset_bottom = -45.0
-color = Color(0.7, 0.5, 0.28, 0.5)
+[node name="HairSide" type="Polygon2D" parent="Office/SideDesk/NPC4"]
+position = Vector2(0, -58)
+color = Color(0.68, 0.48, 0.28, 0.6)
+polygon = PackedVector2Array(-30, -35, -25, -35, -22, 10, -28, 10)
 
-[node name="LeftHand" type="ColorRect" parent="Office/SideDesk/NPC4"]
-offset_left = -35.0
-offset_top = -5.0
-offset_right = -24.0
-offset_bottom = 10.0
-color = Color(0.95, 0.82, 0.68, 1)
+[node name="LeftHand" type="Polygon2D" parent="Office/SideDesk/NPC4"]
+position = Vector2(-42, 50)
+color = Color(0.96, 0.85, 0.72, 1)
+polygon = PackedVector2Array(-12, -10, 12, -10, 12, 10, -12, 10)
 
-[node name="RightHand" type="ColorRect" parent="Office/SideDesk/NPC4"]
-offset_left = 24.0
-offset_top = -5.0
-offset_right = 35.0
-offset_bottom = 10.0
-color = Color(0.95, 0.82, 0.68, 1)
+[node name="RightHand" type="Polygon2D" parent="Office/SideDesk/NPC4"]
+position = Vector2(42, 50)
+color = Color(0.96, 0.85, 0.72, 1)
+polygon = PackedVector2Array(-12, -10, 12, -10, 12, 10, -12, 10)
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 layer = 10
@@ -1233,43 +674,42 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -120.0
-offset_top = -100.0
-offset_right = 120.0
-offset_bottom = -70.0
+offset_left = -150.0
+offset_top = -120.0
+offset_right = 150.0
+offset_bottom = -80.0
+theme_override_font_sizes/font_size = 24
 text = "⎋ ESC zum Aufstehen"
 horizontal_alignment = 1
 
-[node name="Taskbar" type="ColorRect" parent="UILayer"]
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -50.0
-color = Color(0.12, 0.12, 0.14, 0.98)
+[node name="Taskbar" type="Polygon2D" parent="UILayer"]
+color = Color(0.15, 0.15, 0.18, 0.98)
+polygon = PackedVector2Array(0, 1020, 1920, 1020, 1920, 1080, 0, 1080)
 
-[node name="TaskbarHighlight" type="ColorRect" parent="UILayer/Taskbar"]
-offset_right = 1280.0
-offset_bottom = 2.0
-color = Color(0.25, 0.25, 0.28, 1)
+[node name="TaskbarTop" type="Polygon2D" parent="UILayer"]
+color = Color(0.28, 0.28, 0.32, 1)
+polygon = PackedVector2Array(0, 1020, 1920, 1020, 1920, 1023, 0, 1023)
 
-[node name="MoneyLabel" type="Label" parent="UILayer/Taskbar"]
-offset_left = 25.0
-offset_top = 14.0
-offset_right = 150.0
-offset_bottom = 38.0
+[node name="MoneyLabel" type="Label" parent="UILayer"]
+offset_left = 40.0
+offset_top = 1035.0
+offset_right = 200.0
+offset_bottom = 1065.0
+theme_override_font_sizes/font_size = 22
 text = "💰 0 €"
 
-[node name="XPLabel" type="Label" parent="UILayer/Taskbar"]
-offset_left = 160.0
-offset_top = 14.0
-offset_right = 280.0
-offset_bottom = 38.0
+[node name="XPLabel" type="Label" parent="UILayer"]
+offset_left = 220.0
+offset_top = 1035.0
+offset_right = 380.0
+offset_bottom = 1065.0
+theme_override_font_sizes/font_size = 22
 text = "⭐ 0 XP"
 
-[node name="DayLabel" type="Label" parent="UILayer/Taskbar"]
-offset_left = 300.0
-offset_top = 14.0
-offset_right = 420.0
-offset_bottom = 38.0
+[node name="DayLabel" type="Label" parent="UILayer"]
+offset_left = 400.0
+offset_top = 1035.0
+offset_right = 560.0
+offset_bottom = 1065.0
+theme_override_font_sizes/font_size = 22
 text = "📅 Tag 1"
