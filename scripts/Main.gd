@@ -1,22 +1,19 @@
 # Junior Developer Simulator - Main Scene
-# Godot 4 - Flat Vector Art Design
+# Godot 4 - With Kenney Characters
 
 extends Node2D
 
-# Camera zoom states
 var is_zoomed_in := false
 var zoom_target := Vector2(0.4, 0.4)
 var zoom_default := Vector2(1.0, 1.0)
 var zoom_speed := 4.0
 
-# Game state
 var money := 0
 var reputation := 0
 var day := 1
 
-# Nodes
 @onready var camera := $Camera2D
-@onready var player := $Office/PlayerDesk/Player
+@onready var player := $Office/PlayerDesk/Player/KenneyCharacter
 @onready var zoom_hint := $UILayer/ZoomHint
 @onready var monitor := $Office/PlayerDesk/Monitor
 
@@ -26,15 +23,12 @@ func _ready():
 	print("Junior Developer Simulator gestartet!")
 
 func _process(delta):
-	# Smooth zoom
 	var target_zoom = zoom_target if is_zoomed_in else zoom_default
 	camera.zoom = camera.zoom.lerp(target_zoom, zoom_speed * delta)
 	
-	# Smooth camera movement
-	var target_pos = Vector2(960, 600) if is_zoomed_in else Vector2(960, 540)
+	var target_pos = Vector2(960, 620) if is_zoomed_in else Vector2(960, 540)
 	camera.global_position = camera.global_position.lerp(target_pos, zoom_speed * delta)
 	
-	# Fade player when zoomed
 	if player:
 		player.modulate.a = lerpf(player.modulate.a, 0.0 if is_zoomed_in else 1.0, 6.0 * delta)
 
@@ -46,7 +40,7 @@ func _input(event):
 		if not is_zoomed_in:
 			var click_pos = get_global_mouse_position()
 			var monitor_pos = monitor.global_position
-			var monitor_rect = Rect2(monitor_pos.x - 150, monitor_pos.y, 300, 170)
+			var monitor_rect = Rect2(monitor_pos.x - 130, monitor_pos.y, 260, 140)
 			if monitor_rect.has_point(click_pos):
 				zoom_in()
 
